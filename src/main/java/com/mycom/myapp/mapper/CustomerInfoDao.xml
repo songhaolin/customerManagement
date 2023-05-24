@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mycom.myapp.mapper.CustomerInfoDao">
+    <resultMap id="BaseResultMap" type="com.mycom.myapp.pojo.CustomerInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="income" jdbcType="VARCHAR" property="income"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , `name`, gender, age, phone, email, income, country
+    </sql>
+
+    <select id="getCustomerInfoList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer_info limit 10
+    </select>
+
+    <select id="queryCustomerInfoList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer_info where 1=1
+        <if test="name != null and  name != ''">
+            and name  = #{name}
+        </if>
+        <if test="phone != null and phone != '' ">
+            and phone  = #{phone}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from customer_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from customer_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mycom.myapp.pojo.CustomerInfo"
+            useGeneratedKeys="true">
+        insert into customer_info (`name`, gender, age,
+                                   phone, email, income,
+                                   country)
+        values (#{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+                #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{income,jdbcType=VARCHAR},
+                #{country,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.mycom.myapp.pojo.CustomerInfo">
+        update customer_info
+        set `name`  = #{name,jdbcType=VARCHAR},
+            gender  = #{gender,jdbcType=VARCHAR},
+            age     = #{age,jdbcType=INTEGER},
+            phone   = #{phone,jdbcType=VARCHAR},
+            email   = #{email,jdbcType=VARCHAR},
+            income  = #{income,jdbcType=VARCHAR},
+            country = #{country,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
