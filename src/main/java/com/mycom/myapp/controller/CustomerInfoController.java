@@ -25,7 +25,7 @@ public class CustomerInfoController {
     public String toCustomerInfo(Model model) {
         List<CustomerInfo> infoList = customerInfoService.getCustomerInfoList();
         model.addAttribute("infoList",infoList);
-        return "customerInfo";
+        return "customerInfo/customerInfo";
     }
 
     @RequestMapping("/queryCustomerInfo")
@@ -33,7 +33,40 @@ public class CustomerInfoController {
 
         List<CustomerInfo> infoList = customerInfoService.queryCustomerInfoList(customerInfo);
         model.addAttribute("infoList",infoList);
-        return "customerInfo";
+        return "customerInfo/customerInfo";
+    }
+
+    @RequestMapping("/toUpdateOrAddCustomerInfo")
+    public String toUpdateOrAddCustomerInfo(CustomerInfo customerInfo,Model model) {
+        CustomerInfo customerInfo1 = customerInfoService.selectByPrimaryKey(customerInfo.getId());
+        model.addAttribute("customerInfo",customerInfo1);
+        return "customerInfo/updateOrAddCustomerInfo";
+    }
+
+    @RequestMapping("/updateOrAddCustomerInfo")
+    public String updateCustomerInfo(CustomerInfo customerInfo , Model model) {
+        int i = 0;
+        if (customerInfo.getId()==null){
+             i = customerInfoService.insert(customerInfo);
+        }else {
+            i = customerInfoService.updateByPrimaryKey(customerInfo);
+        }
+        if (i>0) {
+            model.addAttribute("customerInfo", customerInfo);
+            model.addAttribute("errormessage", "新增/更新成功");
+            return "customerInfo/updateOrAddCustomerInfo";
+        }else {
+            model.addAttribute("customerInfo", customerInfo);
+            model.addAttribute("errormessage", "新增/更新失败");
+            return "customerInfo/updateOrAddCustomerInfo";
+        }
+    }
+
+    @RequestMapping("/deleteCustomerInfo")
+    public String deleteCustomerInfo(CustomerInfo customerInfo , Model model) {
+        int i = customerInfoService.deleteByPrimaryKey(customerInfo.getId());
+        return "customerInfo/customerInfo";
+
     }
 
 }

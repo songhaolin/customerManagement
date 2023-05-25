@@ -1,13 +1,11 @@
 package com.mycom.myapp.pojo;
 
 import java.io.Serializable;
-import lombok.Data;
 
 /**
  * customer_info
  * @author 
  */
-@Data
 public class CustomerInfo implements Serializable {
     /**
      * 主键ID
