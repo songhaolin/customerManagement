@@ -47,4 +47,9 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     public List<CustomerInfo> queryCustomerInfoList(CustomerInfo customerInfo) {
         return customerInfoDao.queryCustomerInfoList(customerInfo);
     }
+
+    @Override
+    public int deleteCustomerInfoBatch(String... ids) {
+        return customerInfoDao.deleteCustomerInfoBatch(ids);
+    }
 }

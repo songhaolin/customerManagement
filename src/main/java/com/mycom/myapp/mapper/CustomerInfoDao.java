@@ -1,6 +1,7 @@
 package com.mycom.myapp.mapper;
 
 import com.mycom.myapp.pojo.CustomerInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface CustomerInfoDao {
 
     List<CustomerInfo> getCustomerInfoList();
     List<CustomerInfo> queryCustomerInfoList(CustomerInfo customerInfo);
+
+    int deleteCustomerInfoBatch(@Param("ids") String... ids);
 
 }

@@ -5,6 +5,7 @@ import com.mycom.myapp.service.CustomerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -30,7 +31,6 @@ public class CustomerInfoController {
 
     @RequestMapping("/queryCustomerInfo")
     public String queryCustomerInfo(CustomerInfo customerInfo , Model model) {
-
         List<CustomerInfo> infoList = customerInfoService.queryCustomerInfoList(customerInfo);
         model.addAttribute("infoList",infoList);
         return "customerInfo/customerInfo";
@@ -53,11 +53,11 @@ public class CustomerInfoController {
         }
         if (i>0) {
             model.addAttribute("customerInfo", customerInfo);
-            model.addAttribute("errormessage", "新增/更新成功");
+            model.addAttribute("errormessage", "操作成功！");
             return "customerInfo/updateOrAddCustomerInfo";
         }else {
             model.addAttribute("customerInfo", customerInfo);
-            model.addAttribute("errormessage", "新增/更新失败");
+            model.addAttribute("errormessage", "操作失败");
             return "customerInfo/updateOrAddCustomerInfo";
         }
     }
@@ -65,8 +65,15 @@ public class CustomerInfoController {
     @RequestMapping("/deleteCustomerInfo")
     public String deleteCustomerInfo(CustomerInfo customerInfo , Model model) {
         int i = customerInfoService.deleteByPrimaryKey(customerInfo.getId());
-        return "customerInfo/customerInfo";
+        return toCustomerInfo(model);
 
+    }
+    @RequestMapping("/deleteCustomerInfoBatch")
+    public String deleteCustomerInfoBatch(Model model, String... ids) {
+        if (!StringUtils.isEmpty(ids)){
+            customerInfoService.deleteCustomerInfoBatch(ids);
+        }
+        return toCustomerInfo(model);
     }
 
 }

@@ -1,19 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>客户管理系统</title>
+    <title>客户信息管理系统</title>
 </head>
 <body>
-<h1>欢迎来到客户管理系统, ${user.username}!</h1>
-<%--<p>Your email is: ${user.email}</p>--%>
-<div>
-    <button onclick="location.href='${pageContext.request.contextPath}/customerInfo/toCustomerInfo'">客户信息</button>
-    <button onclick="location.href='${pageContext.request.contextPath}/customerCategory/toCustomerCategory'">客户分类</button>
-    <button onclick="location.href='${pageContext.request.contextPath}/customerConsumption/toCustomerConsumption'">信息推送</button>
+<!-- 导航栏 -->
+<%@ include file="navbar.jsp" %>
+<!-- 主要内容区域 -->
+<div class="container-fluid mt-3">
+    <div class="jumbotron" style="position: relative;height: 90vh;">
+        <h2>你好，${user.username}</h2>
+        <h1 class="display-4">欢迎使用客户管理系统！</h1>
+        <p class="lead">请在上方单中选择需要管理的内容。</p>
+        <hr class="my-4">
+        <div class="bottom" style="position: absolute;bottom: 0;width: 100%;  text-align: center ">
+            <p>如果您有任何问题或建议，请联系我们。</p>
+        </div>
+    </div>
 </div>
-<p><a href="${pageContext.request.contextPath}/user/logout">登出</a></p>
+
 </body>
 </html>

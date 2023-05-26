@@ -13,6 +13,7 @@
 </head>
 <body >
 <center>
+    <h1 style="text-align: center">新增/编辑客户信息</h1>
     <form id="form" name="form" method="post" action="${pageContext.request.contextPath}/customerInfo/updateOrAddCustomerInfo">
         <table width="500" height="95" border="0" cellpadding="0" cellspacing="1" style="background-color: #3A8ECD; color: #000;"><tr>
             <tr hidden="hidden">
@@ -56,7 +57,8 @@
             <tr>
                 <td height="30" colspan="2" align="center" valign="middle" bgcolor="#FFFFFF">
                     <input type="submit" name="button" id="button" value="提交" />&nbsp;&nbsp;
-                    <input type="reset" name="button2" id="button2" value="返回" /></td>
+                    <input type="button" name="button2" id="button2" value="返回"
+                           onclick="location.href='${pageContext.request.contextPath}/customerInfo/toCustomerInfo'"/></td>
             </tr>
         </table>
     </form>

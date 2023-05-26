@@ -16,4 +16,6 @@ public interface CustomerInfoService {
     List<CustomerInfo> getCustomerInfoList();
     List<CustomerInfo> queryCustomerInfoList(CustomerInfo customerInfo);
 
+    int deleteCustomerInfoBatch(String...ids);
+
 }

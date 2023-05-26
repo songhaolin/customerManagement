@@ -21,6 +21,11 @@ public class UserController {
         return "register";
     }
 
+    @RequestMapping("/toMain")
+    public String toMain(){
+        return "main";
+    }
+
     @RequestMapping("/register")
     public String register(User user, Model model) {
         boolean isOK = userService.register(user);
